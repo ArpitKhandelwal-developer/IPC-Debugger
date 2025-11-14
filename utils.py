@@ -7,6 +7,7 @@ def trace_event(trace_list, etype, label=None, meta=None):
     if meta is None:
         meta = {}
     e = {
+        'id': int(time.time() * 1000000),  # microsecond event id
         'time': time.time(),
         'type': etype,
         'label': label,
