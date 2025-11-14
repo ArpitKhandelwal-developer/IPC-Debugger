@@ -20,6 +20,12 @@ class MiniPlot(FigureCanvas):
         self.y = y
         self.ax.clear()
         self.ax.plot(self.x, self.y)
+
+        # New improvement: adaptive graph height
+        if len(y) > 0:
+            ymax = max(10, max(y) + 2)
+            self.ax.set_ylim(0, ymax)
+
         self.ax.relim()
         self.ax.autoscale_view()
         self.draw()
