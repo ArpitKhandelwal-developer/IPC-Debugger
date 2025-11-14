@@ -59,5 +59,8 @@ def run_all_detectors(traces, processes):
     alerts = []
     alerts.extend(detect_queue_backlog(traces))
     alerts.extend(detect_pipe_latency(traces))
-    alerts.extend(detect_deadlock(traces, processes))
+    dl = detect_deadlock(traces, processes)
+    for a in dl:
+        a["severity"] = "critical"
+    alerts.extend(dl)
     return alerts
