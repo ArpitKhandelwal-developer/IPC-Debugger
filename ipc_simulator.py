@@ -14,6 +14,19 @@ class IPCSimulator:
         self.processes = {}
         self.traces = self.manager.list()
         self.running = mp.Event()
+    
+    def cleanup_shared_memory(self, name):
+        """
+        Safely unlink shared memory block to prevent memory leaks.
+        """
+        try:
+            shm = shared_memory.SharedMemory(name=name)
+            shm.unlink()
+        except FileNotFoundError:
+            pass
+        except Exception as e:
+            trace_event(self.traces, 'shm_cleanup_error', name, {'error': str(e)})
+
 
     def create_pipe(self):
         return mp.Pipe(duplex=True)
