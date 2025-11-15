@@ -1,5 +1,4 @@
 # Inter-Process Communication (IPC) Debugger  
-### Major Project — K24EL  
 A debugging and visualization tool for Pipes, Message Queues, and Shared Memory using Python.
 
 ---
